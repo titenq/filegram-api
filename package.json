@@ -24,7 +24,6 @@
     "@fastify/multipart": "^9.0.3",
     "@fastify/rate-limit": "^10.2.2",
     "axios": "^1.8.2",
-    "busboy": "^1.6.0",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
     "grammy": "^1.35.0",
