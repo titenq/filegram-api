@@ -6,15 +6,32 @@ import {
   getFileController,
   getFilesController
 } from '@/controllers/fileController';
+import authHandler from '@/handlers/authHandler';
 
 const fileRoute = async (fastify: FastifyInstance) => {
-  fastify.post('/files/upload', fileUploadController);
+  fastify.post(
+    '/files/upload',
+    { preHandler: authHandler },
+    fileUploadController
+  );
 
-  fastify.get('/files', getFilesController);
+  fastify.get(
+    '/files',
+    { preHandler: authHandler },
+    getFilesController
+  );
 
-  fastify.get('/files/:fileId/download', getFileController);
+  fastify.get<{ Params: { fileId: string } }>(
+    '/files/:fileId/download',
+    { preHandler: authHandler },
+    getFileController
+  );
 
-  fastify.delete('/files/:id/:messageId', fileDeleteController);
+  fastify.delete<{ Params: { id: string; messageId: string } }>(
+    '/files/:id/:messageId',
+    { preHandler: authHandler },
+    fileDeleteController
+  );
 };
 
 export default fileRoute;
